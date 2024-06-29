@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fresh_mart_app/Admin/home_admin.dart';
 
 class AdminLogin extends StatefulWidget {
   const AdminLogin({Key? key}) : super(key: key);
@@ -10,6 +12,34 @@ class AdminLogin extends StatefulWidget {
 class _AdminLoginState extends State<AdminLogin> {
   TextEditingController usernamecontroller = new TextEditingController();
   TextEditingController userpasswordcontroller = new TextEditingController();
+  loginAdmin() {
+    FirebaseFirestore.instance.collection("Admin").get().then((Snapshot) {
+      Snapshot.docs.forEach((result) {
+        if (result.data()['username'] != usernamecontroller.text.trim()) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.redAccent,
+            content: Text(
+              'Wrong Username',
+              style: TextStyle(fontSize: 20.0),
+            ),
+          ));
+        } else if (result.data()['password'] !=
+            userpasswordcontroller.text.trim()) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.redAccent,
+            content: Text(
+              'Wrong Password',
+              style: TextStyle(fontSize: 20.0),
+            ),
+          ));
+        } else {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => HomeAdmin()));
+        }
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,12 +50,11 @@ class _AdminLoginState extends State<AdminLogin> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          // Wrap with SingleChildScrollView
           padding: EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              SizedBox(height: 50),
+              SizedBox(height: 130),
               Center(
                 child: Text(
                   'Admin Panel',
@@ -50,7 +79,7 @@ class _AdminLoginState extends State<AdminLogin> {
                   fillColor: Colors.white,
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 30),
               TextFormField(
                 controller: userpasswordcontroller,
                 decoration: InputDecoration(
@@ -65,9 +94,11 @@ class _AdminLoginState extends State<AdminLogin> {
                 ),
                 obscureText: true,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 30),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  loginAdmin();
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.purple,
                   shape: RoundedRectangleBorder(

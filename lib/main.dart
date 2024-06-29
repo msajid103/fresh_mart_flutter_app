@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fresh_mart_app/Admin/add_product.dart';
 import 'package:fresh_mart_app/Admin/admin_login.dart';
 import 'pages/login.dart';
+import 'pages/product_detail.dart';
 // import 'pages/register.dart';
 
 void main() async {
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: AdminLogin(),
+      home: ProductDetail(),
     );
   }
 }
