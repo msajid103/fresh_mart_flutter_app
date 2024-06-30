@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ProductDetail extends StatefulWidget {
-  const ProductDetail({super.key});
+  String image, name, detail, price;
+  ProductDetail(
+      {required this.image,
+      required this.name,
+      required this.detail,
+      required this.price});
 
   @override
   State<ProductDetail> createState() => _ProductDetailState();
@@ -19,8 +25,8 @@ class _ProductDetailState extends State<ProductDetail> {
             Stack(
               children: [
                 Center(
-                  child: Image.asset(
-                    "images/headphone2.png",
+                  child: Image.network(
+                    widget.image,
                     height: 400,
                   ),
                 ),
@@ -44,14 +50,14 @@ class _ProductDetailState extends State<ProductDetail> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Headphone",
+                          widget.name,
                           style: TextStyle(
                             fontSize: 23.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          "\$300",
+                          "\$ ${widget.price}",
                           style: TextStyle(
                             color: Color(0xFFfd6f3e),
                             fontSize: 23.0,
@@ -70,7 +76,7 @@ class _ProductDetailState extends State<ProductDetail> {
                     ),
                     SizedBox(height: 10.0),
                     Text(
-                      "The product is very good. It has a 1-year warranty. These headphones are great; you can even hear someone speaking softly, but beware of Shivam—he speaks very loudly.",
+                      widget.detail,
                     ),
                     SizedBox(height: 90.0),
                     Container(

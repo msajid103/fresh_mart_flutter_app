@@ -19,7 +19,7 @@ class _AddProductState extends State<AddProduct> {
   File? selectedImage;
   TextEditingController namecontroller = new TextEditingController();
   TextEditingController pricecontroller = new TextEditingController();
-  TextEditingController deatailcontroller = new TextEditingController();
+  TextEditingController detailcontroller = new TextEditingController();
   Future getImage() async {
     var image = await _picker.pickImage(source: ImageSource.gallery);
     selectedImage = File(image!.path);
@@ -37,11 +37,14 @@ class _AddProductState extends State<AddProduct> {
         "Name": namecontroller.text,
         "Image": dowloadUrl,
         "Price": pricecontroller.text,
-        "Deatail": deatailcontroller.text
+        "Detail": detailcontroller.text
       };
       await DatabaseMethods().addProduct(addProduct, value!).then((value) {
         selectedImage = null;
         namecontroller.text = '';
+        pricecontroller.text = '';
+        detailcontroller.text = '';
+
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: Colors.redAccent,
           content: Text(
@@ -160,7 +163,7 @@ class _AddProductState extends State<AddProduct> {
                 ),
                 child: TextField(
                   maxLines: 6,
-                  controller: deatailcontroller,
+                  controller: detailcontroller,
                   decoration: InputDecoration(border: InputBorder.none),
                 ),
               ),
