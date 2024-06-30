@@ -5,7 +5,8 @@ import '/pages/home.dart';
 import '/pages/profile.dart';
 
 class BottomNav extends StatefulWidget {
-  const BottomNav({Key? key}) : super(key: key);
+  final String email;
+  const BottomNav({Key? key, required this.email}) : super(key: key);
 
   @override
   _BottomNavState createState() => _BottomNavState();
@@ -21,7 +22,7 @@ class _BottomNavState extends State<BottomNav> {
 
   @override
   void initState() {
-    HomePage = Home();
+    HomePage = Home(email: widget.email);
     order = Order();
     profile = Profile();
     pages = [HomePage, order, profile];

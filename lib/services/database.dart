@@ -8,6 +8,14 @@ class DatabaseMethods {
         .set(userInfoMap);
   }
 
+  Future<DocumentSnapshot> getUserDetailsByEmail(String email) async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .where('Email', isEqualTo: email)
+        .get();
+    return querySnapshot.docs.first;
+  }
+
   Future addProduct(
       Map<String, dynamic> userInfoMap, String categoryname) async {
     return await FirebaseFirestore.instance

@@ -48,7 +48,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         };
         await DatabaseMethods().addUserDetails(userInfoMap, Id);
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => BottomNav()));
+            context, MaterialPageRoute(builder: (context) => LoginScreen()));
       } on FirebaseException catch (e) {
         if (e.code == 'weak-password') {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(

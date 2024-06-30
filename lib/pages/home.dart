@@ -1,10 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fresh_mart_app/pages/category_products.dart';
 import 'package:fresh_mart_app/services/shared_pre.dart';
+import '../services/database.dart';
 import '../widget/support_widget.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final String email;
+  const Home({super.key, required this.email});
 
   @override
   State<Home> createState() => _HomeState();
@@ -27,8 +30,18 @@ class _HomeState extends State<Home> {
   }
 
   ontheload() async {
-    await getthesharedpref();
+    // await getthesharedpref();
+    await getUserName();
     setState(() {});
+  }
+
+  Future<void> getUserName() async {
+    DocumentSnapshot userDoc =
+        await DatabaseMethods().getUserDetailsByEmail(widget.email);
+    setState(() {
+      name = userDoc['Name'];
+      image = userDoc['Image'];
+    });
   }
 
   @override
