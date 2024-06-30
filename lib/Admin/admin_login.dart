@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fresh_mart_app/Admin/add_product.dart';
 import 'package:fresh_mart_app/Admin/home_admin.dart';
 
 class AdminLogin extends StatefulWidget {
@@ -34,7 +35,7 @@ class _AdminLoginState extends State<AdminLogin> {
           ));
         } else {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => HomeAdmin()));
+              context, MaterialPageRoute(builder: (context) => AddProduct()));
         }
       });
     });

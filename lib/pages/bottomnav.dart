@@ -24,7 +24,7 @@ class _BottomNavState extends State<BottomNav> {
   void initState() {
     HomePage = Home(email: widget.email);
     order = Order();
-    profile = Profile();
+    profile = Profile(email: widget.email);
     pages = [HomePage, order, profile];
     super.initState();
   }

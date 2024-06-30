@@ -16,6 +16,22 @@ class DatabaseMethods {
     return querySnapshot.docs.first;
   }
 
+  Future updateUserProfile(
+      String email, Map<String, dynamic> updatedInfo) async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .where('Email', isEqualTo: email)
+        .get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      String docId = querySnapshot.docs.first.id;
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(docId)
+          .update(updatedInfo);
+    }
+  }
+
   Future addProduct(
       Map<String, dynamic> userInfoMap, String categoryname) async {
     return await FirebaseFirestore.instance
