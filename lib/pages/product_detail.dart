@@ -1,18 +1,18 @@
-// import 'dart:convert';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_stripe/flutter_stripe.dart';
-// import 'package:fresh_mart_app/services/constant.dart';
-// import 'package:http/http.dart' as http;
+import 'package:fresh_mart_app/pages/payment.dart';
 
 // ignore: must_be_immutable
 class ProductDetail extends StatefulWidget {
-  String image, name, detail, price;
-  ProductDetail(
-      {required this.image,
-      required this.name,
-      required this.detail,
-      required this.price});
+  String image, name, detail, price, userEmail;
+
+  ProductDetail({
+    required this.image,
+    required this.name,
+    required this.detail,
+    required this.price,
+    required this.userEmail,
+  });
 
   @override
   State<ProductDetail> createState() => _ProductDetailState();
@@ -20,6 +20,7 @@ class ProductDetail extends StatefulWidget {
 
 class _ProductDetailState extends State<ProductDetail> {
   Map<String, dynamic>? paymentIntent;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +66,7 @@ class _ProductDetailState extends State<ProductDetail> {
                         Text(
                           "\$ ${widget.price}",
                           style: TextStyle(
-                            color: Color(0xFFfd6f3e),
+                            color: Colors.purple,
                             fontSize: 23.0,
                             fontWeight: FontWeight.bold,
                           ),
@@ -81,33 +82,88 @@ class _ProductDetailState extends State<ProductDetail> {
                       ),
                     ),
                     SizedBox(height: 10.0),
-                    Text(
-                      widget.detail,
-                    ),
-                    SizedBox(height: 90.0),
-                    GestureDetector(
-                      onTap: () {
-                        ;
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 10.0),
-                        decoration: BoxDecoration(
-                          color: Color(0xFFfd6f3e),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        width: MediaQuery.of(context).size.width,
-                        child: Center(
-                          child: Text(
-                            "Buy Now",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
+                    Text(widget.detail),
+                    Spacer(),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () async {
+                              await addToCart();
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(vertical: 10.0),
+                              decoration: BoxDecoration(
+                                color: Colors.blue,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(Icons.add_shopping_cart,
+                                        color: Colors.white),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      "Add to Cart",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PaymentPage(
+                                    image: widget.image,
+                                    name: widget.name,
+                                    price: widget.price,
+                                    userEmail: widget.userEmail,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(vertical: 10.0),
+                              decoration: BoxDecoration(
+                                color: Colors.purple,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(Icons.shopping_bag,
+                                        color: Colors.white),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      "Buy Now",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
+                    SizedBox(height: 20),
                   ],
                 ),
               ),
@@ -118,84 +174,26 @@ class _ProductDetailState extends State<ProductDetail> {
     );
   }
 
-  // Future<void> makePayment(String amount) async {
-  //   try {
-  //     paymentIntent = await createPaymentIntent(amount, 'USD');
-  //     await Stripe.instance
-  //         .initPaymentSheet(
-  //             paymentSheetParameters: SetupPaymentSheetParameters(
-  //                 paymentIntentClientSecret: paymentIntent?['client_secret'],
-  //                 style: ThemeMode.dark,
-  //                 merchantDisplayName: "Sajid"))
-  //         .then((value) {});
+  Future<void> addToCart() async {
+    final cartItem = {
+      'name': widget.name,
+      'price': widget.price,
+      'image': widget.image,
+    };
 
-  //     displayPaymentSheet();
-  //   } catch (e, s) {
-  //     print('exception:$e$s');
-  //   }
-  // }
-
-  // displayPaymentSheet() async {
-  //   try {
-  //     await Stripe.instance.presentPaymentSheet().then((value) async {
-  //       showDialog(
-  //           context: context,
-  //           builder: (_) => AlertDialog(
-  //                 content: Column(
-  //                   mainAxisSize: MainAxisSize.min,
-  //                   children: [
-  //                     Row(
-  //                       children: [
-  //                         Icon(
-  //                           Icons.check_circle,
-  //                           color: Colors.green,
-  //                         ),
-  //                         Text('Payment Successfully')
-  //                       ],
-  //                     )
-  //                   ],
-  //                 ),
-  //               ));
-  //       paymentIntent = null;
-  //     }).onError((error, StackTrace) {
-  //       print("Error is: $error $StackTrace");
-  //     });
-  //   } on StripeException catch (e) {
-  //     print("Error is : $e");
-  //     showDialog(
-  //         context: context,
-  //         builder: (_) => AlertDialog(
-  //               content: Text("Cancelled"),
-  //             ));
-  //   } catch (e) {
-  //     print('$e');
-  //   }
-  // }
-
-  // createPaymentIntent(String amount, String currency) async {
-  //   try {
-  //     Map<String, dynamic> body = {
-  //       'amount': calculateAmount(amount),
-  //       'currency': currency,
-  //       'payment_method_types[]': 'card'
-  //     };
-
-  //     var response = await http.post(
-  //       Uri.parse('https://api.stripe.com/v1/payment_intents'),
-  //       headers: {
-  //         'Authhorization': 'Bearer $secretkey',
-  //         'Content-Type': 'application/x-www-form-urlencoded',
-  //       },
-  //       body: body,
-  //     );
-  //     return jsonDecode(response.body);
-  //   } catch (err) {
-  //     print("err charging user: ${err.toString()}");
-  //   }
-  // }
-
-  // calculateAmount(String amount) {
-  //   final calculatedAmount = (int.parse(amount) * 100);
-  //   return calculatedAmount.toString();
-  // }
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(widget.userEmail)
+          .collection('cart')
+          .add(cartItem);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Item added to cart')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to add item to cart: $e')),
+      );
+    }
+  }
 }

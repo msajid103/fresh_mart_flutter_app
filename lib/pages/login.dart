@@ -46,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple.shade50,
+      backgroundColor: Color(0xfff2f2f2),
       appBar: AppBar(
         title: Text('Login'),
         backgroundColor: Colors.purple,
@@ -63,11 +63,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: 50),
                   Center(
                     child: Text(
-                      'Sign into your Account',
+                      'Sign In',
                       style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
-                        color: Colors.purple,
+                        color: Colors.black,
                       ),
                     ),
                   ),
@@ -77,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       'Enter your credentials to login',
                       style: TextStyle(
                         fontSize: 18,
-                        color: Colors.purple.shade700,
+                        color: Colors.black,
                       ),
                     ),
                   ),
@@ -86,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: mailcontroller,
                     decoration: InputDecoration(
                       labelText: 'Email',
-                      prefixIcon: Icon(Icons.person, color: Colors.purple),
+                      prefixIcon: Icon(Icons.person, color: Colors.black),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                         borderSide: BorderSide(color: Colors.purple),
@@ -106,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: passwordcontroller,
                     decoration: InputDecoration(
                       labelText: 'Password',
-                      prefixIcon: Icon(Icons.lock, color: Colors.purple),
+                      prefixIcon: Icon(Icons.lock, color: Colors.black),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                         borderSide: BorderSide(color: Colors.purple),
@@ -151,8 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       Text(
                         "Don't have account?",
-                        style: TextStyle(
-                            fontSize: 16, color: Colors.purple.shade700),
+                        style: TextStyle(fontSize: 16, color: Colors.black),
                       ),
                       TextButton(
                         onPressed: () {
@@ -164,7 +163,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         child: Text(
                           'Register',
-                          style: TextStyle(fontSize: 16, color: Colors.purple),
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],
@@ -174,8 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       Text(
                         "Login As Admin",
-                        style: TextStyle(
-                            fontSize: 16, color: Colors.purple.shade700),
+                        style: TextStyle(fontSize: 16, color: Colors.black),
                       ),
                       TextButton(
                         onPressed: () {
@@ -187,7 +188,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         child: Text(
                           'Login',
-                          style: TextStyle(fontSize: 16, color: Colors.purple),
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],

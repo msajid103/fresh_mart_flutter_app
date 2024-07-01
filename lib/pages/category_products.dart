@@ -9,8 +9,8 @@ import '../widget/support_widget.dart';
 
 // ignore: must_be_immutable
 class CategoryProducts extends StatefulWidget {
-  String category;
-  CategoryProducts({required this.category});
+  String category, userEmail;
+  CategoryProducts({required this.category, required this.userEmail});
 
   @override
   _CategoryProductsState createState() => _CategoryProductsState();
@@ -74,7 +74,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
                               // ignore: prefer_interpolation_to_compose_strings
                               '\$ ' + ds["Price"],
                               style: TextStyle(
-                                  color: Color(0xFFfd6f3e),
+                                  color: Colors.purple,
                                   fontSize: 22.0,
                                   fontWeight: FontWeight.bold),
                             ),
@@ -87,15 +87,17 @@ class _CategoryProductsState extends State<CategoryProducts> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => ProductDetail(
-                                            image: ds["Image"],
-                                            name: ds["Name"],
-                                            detail: ds["Detail"],
-                                            price: ds["Price"])));
+                                              image: ds["Image"],
+                                              name: ds["Name"],
+                                              detail: ds["Detail"],
+                                              price: ds["Price"],
+                                              userEmail: widget.userEmail,
+                                            )));
                               },
                               child: Container(
                                   padding: EdgeInsets.all(5),
                                   decoration: BoxDecoration(
-                                      color: Color(0xFFfd6f3e),
+                                      color: Colors.purple,
                                       borderRadius: BorderRadius.circular(7)),
                                   child: Icon(
                                     Icons.add,

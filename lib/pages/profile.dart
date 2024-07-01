@@ -50,7 +50,7 @@ class _ProfileState extends State<Profile> {
     if (updatedInfo.isNotEmpty) {
       await DatabaseMethods().updateUserProfile(widget.email, updatedInfo);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        backgroundColor: Colors.green,
+        backgroundColor: Color(0xFFfd6f3e),
         content: Text(
           'Profile Updated Successfully',
           style: TextStyle(fontSize: 20.0),
@@ -109,9 +109,12 @@ class _ProfileState extends State<Profile> {
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: uploadProfile,
-                child: Text('Save'),
+                child: Text(
+                  'Save',
+                  style: TextStyle(color: Colors.white),
+                ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFFfd6f3e),
+                  backgroundColor: Colors.purple,
                 ),
               ),
             ],

@@ -42,24 +42,4 @@ class DatabaseMethods {
   Future<Stream<QuerySnapshot>> getProducts(String catergory) async {
     return await FirebaseFirestore.instance.collection(catergory).snapshots();
   }
-
-  Future<void> placeOrder(String userId, String productId) async {
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(userId)
-        .collection('orders')
-        .add({
-      'productId': productId,
-      'orderDate': DateTime.now(),
-      'status': 'Pending', // Initial status
-    });
-  }
-
-  Future<DocumentSnapshot> getProductDetails(
-      String categoryId, String productId) async {
-    return await FirebaseFirestore.instance
-        .collection(categoryId)
-        .doc(productId)
-        .get();
-  }
 }

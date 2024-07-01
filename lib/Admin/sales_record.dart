@@ -38,16 +38,16 @@ class _SalesRecordPageState extends State<SalesRecordPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Sales Records'),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.purple,
       ),
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Colors.deepPurple.shade200, Colors.indigo.shade300],
-          ),
-        ),
+        // decoration: BoxDecoration(
+        //   gradient: LinearGradient(
+        //     begin: Alignment.topCenter,
+        //     end: Alignment.bottomCenter,
+        //     colors: [Colors.deepPurple.shade200, Colors.indigo.shade300],
+        //   ),
+        // ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

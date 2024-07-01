@@ -30,7 +30,7 @@ class _AdminBottomNavState extends State<AdminBottomNav> {
       bottomNavigationBar: CurvedNavigationBar(
           height: 65,
           backgroundColor: Color(0xfff2f2f2),
-          color: Color(0xFFfd6f3e),
+          color: Colors.purple,
           animationDuration: Duration(milliseconds: 500),
           onTap: (int index) {
             setState(() {

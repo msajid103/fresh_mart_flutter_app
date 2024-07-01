@@ -3,16 +3,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'bottomnav.dart';
 
-class Order extends StatelessWidget {
+class CartPage extends StatelessWidget {
   final String userEmail;
 
-  Order({required this.userEmail});
+  CartPage({required this.userEmail});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Orders'),
+        title: Text('My Cart'),
         backgroundColor: Colors.purple,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
@@ -33,20 +33,19 @@ class Order extends StatelessWidget {
                 stream: FirebaseFirestore.instance
                     .collection('users')
                     .doc(userEmail)
-                    .collection('orders')
+                    .collection('cart')
                     .snapshots(),
                 builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (!snapshot.hasData) {
                     return Center(child: CircularProgressIndicator());
                   }
                   if (snapshot.data!.docs.isEmpty) {
-                    return Center(
-                        child: Text('You have not placed any order yet.'));
+                    return Center(child: Text('Your cart is empty.'));
                   }
                   return ListView.builder(
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) {
-                      var orderItem = snapshot.data!.docs[index];
+                      var cartItem = snapshot.data!.docs[index];
                       return Card(
                         margin: EdgeInsets.symmetric(vertical: 5.0),
                         child: Padding(
@@ -54,7 +53,7 @@ class Order extends StatelessWidget {
                           child: Row(
                             children: [
                               Image.network(
-                                orderItem['image'],
+                                cartItem['image'],
                                 height: 100,
                                 width: 100,
                                 fit: BoxFit.cover,
@@ -65,7 +64,7 @@ class Order extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      orderItem['name'],
+                                      cartItem['name'],
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
@@ -73,15 +72,7 @@ class Order extends StatelessWidget {
                                     ),
                                     SizedBox(height: 5),
                                     Text(
-                                      'Price: \$${orderItem['price']}',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.grey[700],
-                                      ),
-                                    ),
-                                    SizedBox(height: 5),
-                                    Text(
-                                      'Status: ${orderItem['status']}',
+                                      'Price: \$${cartItem['price']}',
                                       style: TextStyle(
                                         fontSize: 16,
                                         color: Colors.grey[700],

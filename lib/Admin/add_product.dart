@@ -64,6 +64,7 @@ class _AddProductState extends State<AddProduct> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Add Product"),
+        backgroundColor: Colors.purple,
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -214,7 +215,7 @@ class _AddProductState extends State<AddProduct> {
                   },
                   child: Text(
                     "Add Product",
-                    style: TextStyle(fontSize: 22.0, color: Color(0xFFfd6f3e)),
+                    style: TextStyle(fontSize: 22.0, color: Colors.purple),
                   ),
                 ),
               ),

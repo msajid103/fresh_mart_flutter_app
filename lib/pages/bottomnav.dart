@@ -1,8 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import '/pages/Order.dart';
+import 'package:fresh_mart_app/pages/add_to_cart.dart';
+// import '/pages/Order.dart';
 import '/pages/home.dart';
 import '/pages/profile.dart';
+import '/pages/Order.dart';
 
 class BottomNav extends StatefulWidget {
   final String email;
@@ -15,7 +17,8 @@ class BottomNav extends StatefulWidget {
 class _BottomNavState extends State<BottomNav> {
   late List<Widget> pages;
   late Home HomePage;
-  late Order order;
+  late CartPage cartPage;
+  late Order OrderPage;
   late Profile profile;
 
   int currentTabIndex = 0;
@@ -23,9 +26,14 @@ class _BottomNavState extends State<BottomNav> {
   @override
   void initState() {
     HomePage = Home(email: widget.email);
-    order = Order();
+    cartPage = CartPage(
+      userEmail: widget.email,
+    );
+    OrderPage = Order(
+      userEmail: widget.email,
+    );
     profile = Profile(email: widget.email);
-    pages = [HomePage, order, profile];
+    pages = [HomePage, cartPage, OrderPage, profile];
     super.initState();
   }
 
@@ -35,7 +43,7 @@ class _BottomNavState extends State<BottomNav> {
       bottomNavigationBar: CurvedNavigationBar(
           height: 65,
           backgroundColor: Color(0xfff2f2f2),
-          color: Color(0xFFfd6f3e),
+          color: Colors.purple,
           animationDuration: Duration(milliseconds: 500),
           onTap: (int index) {
             setState(() {
@@ -49,6 +57,10 @@ class _BottomNavState extends State<BottomNav> {
             ),
             Icon(
               Icons.shopping_bag_outlined,
+              color: Colors.white,
+            ),
+            Icon(
+              Icons.shopping_bag,
               color: Colors.white,
             ),
             Icon(

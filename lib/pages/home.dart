@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fresh_mart_app/pages/category_products.dart';
-import 'package:fresh_mart_app/services/shared_pre.dart';
 import '../services/database.dart';
 import '../widget/support_widget.dart';
 
@@ -23,11 +22,6 @@ class _HomeState extends State<Home> {
   List CategoryName = ["Headphones", "Laptop", "Watch", "Tv"];
 
   String? name, image;
-  getthesharedpref() async {
-    name = await SharedPreferenceHelper().getUserName();
-    image = await SharedPreferenceHelper().getUserImage();
-    setState(() {});
-  }
 
   ontheload() async {
     // await getthesharedpref();
@@ -115,7 +109,7 @@ class _HomeState extends State<Home> {
                           style: AppWidget.semiboldTextFeildStyle()),
                       Text('see all',
                           style: TextStyle(
-                              color: Color(0xFFfd6f3e),
+                              color: Colors.purple,
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold))
                     ],
@@ -126,7 +120,7 @@ class _HomeState extends State<Home> {
                       Container(
                         padding: EdgeInsets.all(8.0),
                         decoration: BoxDecoration(
-                            color: Color(0xFFfd6f3e),
+                            color: Colors.purple,
                             borderRadius: BorderRadius.circular(10)),
                         height: 90,
                         width: 50,
@@ -150,9 +144,9 @@ class _HomeState extends State<Home> {
                             scrollDirection: Axis.horizontal,
                             itemBuilder: ((context, index) {
                               return CategoryTile(
-                                image: categories[index],
-                                name: CategoryName[index],
-                              );
+                                  image: categories[index],
+                                  name: CategoryName[index],
+                                  userEmail: widget.email);
                             }),
                           ),
                         ),
@@ -169,7 +163,7 @@ class _HomeState extends State<Home> {
                           style: AppWidget.semiboldTextFeildStyle()),
                       Text('see all',
                           style: TextStyle(
-                              color: Color(0xFFfd6f3e),
+                              color: Colors.purple,
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold))
                     ],
@@ -208,7 +202,7 @@ class _HomeState extends State<Home> {
                                   Text(
                                     '\$100',
                                     style: TextStyle(
-                                        color: Color(0xFFfd6f3e),
+                                        color: Colors.purple,
                                         fontSize: 22.0,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -218,7 +212,7 @@ class _HomeState extends State<Home> {
                                   Container(
                                       padding: EdgeInsets.all(5),
                                       decoration: BoxDecoration(
-                                          color: Color(0xFFfd6f3e),
+                                          color: Colors.purple,
                                           borderRadius:
                                               BorderRadius.circular(7)),
                                       child: Icon(
@@ -255,7 +249,7 @@ class _HomeState extends State<Home> {
                                   Text(
                                     '\$300',
                                     style: TextStyle(
-                                        color: Color(0xFFfd6f3e),
+                                        color: Colors.purple,
                                         fontSize: 22.0,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -265,7 +259,7 @@ class _HomeState extends State<Home> {
                                   Container(
                                       padding: EdgeInsets.all(5),
                                       decoration: BoxDecoration(
-                                          color: Color(0xFFfd6f3e),
+                                          color: Colors.purple,
                                           borderRadius:
                                               BorderRadius.circular(7)),
                                       child: Icon(
@@ -302,7 +296,7 @@ class _HomeState extends State<Home> {
                                   Text(
                                     '\$1200',
                                     style: TextStyle(
-                                        color: Color(0xFFfd6f3e),
+                                        color: Colors.purple,
                                         fontSize: 22.0,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -312,7 +306,7 @@ class _HomeState extends State<Home> {
                                   Container(
                                       padding: EdgeInsets.all(5),
                                       decoration: BoxDecoration(
-                                          color: Color(0xFFfd6f3e),
+                                          color: Colors.purple,
                                           borderRadius:
                                               BorderRadius.circular(7)),
                                       child: Icon(
@@ -336,8 +330,12 @@ class _HomeState extends State<Home> {
 
 // ignore: must_be_immutable
 class CategoryTile extends StatelessWidget {
-  String image, name;
-  CategoryTile({super.key, required this.image, required this.name});
+  String image, name, userEmail;
+  CategoryTile(
+      {super.key,
+      required this.image,
+      required this.name,
+      required this.userEmail});
 
   @override
   Widget build(BuildContext context) {
@@ -346,7 +344,8 @@ class CategoryTile extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => CategoryProducts(category: name)));
+                builder: (context) =>
+                    CategoryProducts(category: name, userEmail: userEmail)));
       },
       child: Container(
         margin: EdgeInsets.only(right: 20.0),

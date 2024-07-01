@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fresh_mart_app/pages/login.dart';
 import 'package:fresh_mart_app/services/database.dart';
 import 'package:fresh_mart_app/services/shared_pre.dart';
+import 'package:fresh_mart_app/widget/support_widget.dart';
 import 'package:random_string/random_string.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -59,7 +60,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ));
         } else if (e.code == "email-already-in-use") {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: Colors.redAccent,
+            backgroundColor: Color(0xfff2f2f2),
             content: Text(
               'Account Already Exist',
               style: TextStyle(fontSize: 20.0),
@@ -73,7 +74,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple.shade50,
+      backgroundColor: Color(0xfff2f2f2),
       appBar: AppBar(
         title: Text('Register'),
         backgroundColor: Colors.purple,
@@ -91,21 +92,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Center(
                   child: Text(
                     'Create Account',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.purple,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10),
-                Center(
-                  child: Text(
-                    'Fill the details to register',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.purple.shade700,
-                    ),
+                    style: AppWidget.boldTextFeildStyle(),
                   ),
                 ),
                 SizedBox(height: 50),
@@ -199,8 +186,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   children: [
                     Text(
                       'Already have an account? ',
-                      style: TextStyle(
-                          fontSize: 16, color: Colors.purple.shade700),
+                      style: TextStyle(fontSize: 16, color: Colors.black),
                     ),
                     TextButton(
                       onPressed: () {
@@ -211,7 +197,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                       child: Text(
                         'Login',
-                        style: TextStyle(fontSize: 16, color: Colors.purple),
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],

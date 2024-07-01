@@ -43,7 +43,7 @@ class _AdminLoginState extends State<AdminLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple.shade50,
+      backgroundColor: Color(0xfff2f2f2),
       appBar: AppBar(
         title: Text('Admin'),
         backgroundColor: Colors.purple,
@@ -61,7 +61,7 @@ class _AdminLoginState extends State<AdminLogin> {
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
-                    color: Colors.purple,
+                    color: Colors.black,
                   ),
                 ),
               ),
@@ -70,7 +70,7 @@ class _AdminLoginState extends State<AdminLogin> {
                 controller: usernamecontroller,
                 decoration: InputDecoration(
                   labelText: 'Username',
-                  prefixIcon: Icon(Icons.person, color: Colors.purple),
+                  prefixIcon: Icon(Icons.person, color: Colors.black),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: BorderSide(color: Colors.purple),
@@ -84,7 +84,7 @@ class _AdminLoginState extends State<AdminLogin> {
                 controller: userpasswordcontroller,
                 decoration: InputDecoration(
                   labelText: 'Password',
-                  prefixIcon: Icon(Icons.lock, color: Colors.purple),
+                  prefixIcon: Icon(Icons.lock, color: Colors.black),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: BorderSide(color: Colors.purple),
