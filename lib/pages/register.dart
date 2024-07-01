@@ -4,7 +4,6 @@ import 'package:fresh_mart_app/pages/login.dart';
 import 'package:fresh_mart_app/services/database.dart';
 import 'package:fresh_mart_app/services/shared_pre.dart';
 import 'package:random_string/random_string.dart';
-import 'bottomnav.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});

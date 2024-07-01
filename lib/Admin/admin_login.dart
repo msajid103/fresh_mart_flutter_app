@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:fresh_mart_app/Admin/add_product.dart';
-import 'package:fresh_mart_app/Admin/home_admin.dart';
+import 'package:fresh_mart_app/Admin/admin_bottomnav.dart';
 
 class AdminLogin extends StatefulWidget {
   const AdminLogin({Key? key}) : super(key: key);
@@ -34,8 +33,8 @@ class _AdminLoginState extends State<AdminLogin> {
             ),
           ));
         } else {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddProduct()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => AdminBottomNav()));
         }
       });
     });

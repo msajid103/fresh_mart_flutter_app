@@ -1,10 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:fresh_mart_app/Admin/add_product.dart';
-import 'package:fresh_mart_app/pages/bottomnav.dart';
-import 'package:fresh_mart_app/services/constant.dart';
-// import 'package:fresh_mart_app/Admin/admin_login.dart';
 import 'pages/login.dart';
 // import 'pages/product_detail.dart';
 // import 'pages/register.dart';
