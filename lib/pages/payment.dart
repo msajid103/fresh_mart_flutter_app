@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +22,8 @@ class PaymentPage extends StatefulWidget {
 
 class _PaymentPageState extends State<PaymentPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  // ignore: duplicate_ignore
+  // ignore: unused_field
   String? _firstName,
       _lastName,
       _creditCardNumber,

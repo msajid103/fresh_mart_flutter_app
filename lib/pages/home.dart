@@ -6,7 +6,7 @@ import '../widget/support_widget.dart';
 
 class Home extends StatefulWidget {
   final String email;
-  const Home({super.key, required this.email});
+  const Home({Key? key, required this.email}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -24,7 +24,6 @@ class _HomeState extends State<Home> {
   String? name, image;
 
   ontheload() async {
-    // await getthesharedpref();
     await getUserName();
     setState(() {});
   }
@@ -50,312 +49,262 @@ class _HomeState extends State<Home> {
       backgroundColor: const Color(0xfff2f2f2),
       body: name == null
           ? Center(child: CircularProgressIndicator())
-          : Container(
-              margin: const EdgeInsets.only(top: 50.0, left: 20.0, right: 20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment
-                    .start, // Aligns children to the start horizontally
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: [
-                          Text(
-                            "Hey, ${name}",
-                            style: AppWidget.boldTextFeildStyle(),
-                          ),
-                        ],
-                      ),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Image.network(
-                          image!,
-                          height: 50,
-                          width: 50,
-                          fit: BoxFit.cover,
+          : SingleChildScrollView(
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 50.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Hey, ${name}",
+                              style: AppWidget.boldTextFeildStyle(),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 30.0,
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(left: 20.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.network(
+                            image!,
+                            height: 50,
+                            width: 50,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ],
                     ),
-                    width: MediaQuery.of(context).size.width,
-                    child: TextField(
-                      decoration: InputDecoration(
+                    const SizedBox(height: 30.0),
+                    Container(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      width: MediaQuery.of(context).size.width,
+                      child: TextField(
+                        decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: "Search Products",
                           hintStyle: AppWidget.lightTextFeildStyle(),
                           prefixIcon: const Icon(
                             Icons.search,
                             color: Colors.black,
-                          )),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Categories',
-                          style: AppWidget.semiboldTextFeildStyle()),
-                      Text('see all',
-                          style: TextStyle(
-                              color: Colors.purple,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold))
-                    ],
-                  ),
-                  SizedBox(height: 20.0),
-                  Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            color: Colors.purple,
-                            borderRadius: BorderRadius.circular(10)),
-                        height: 90,
-                        width: 50,
-                        child: Center(
-                          child: Text(
-                            "All",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: Container(
-                          margin: EdgeInsets.only(left: 20.0),
-                          height: 100,
-                          child: ListView.builder(
-                            itemCount: categories.length,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: ((context, index) {
-                              return CategoryTile(
+                    ),
+                    const SizedBox(height: 20.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Categories',
+                          style: AppWidget.semiboldTextFeildStyle(),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'see all',
+                              style: TextStyle(
+                                color: Colors.purple,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 5.0,
+                            ),
+                            Icon(Icons.arrow_forward),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20.0),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.only(left: 5.0),
+                            height: 100,
+                            child: ListView.builder(
+                              itemCount: categories.length,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: ((context, index) {
+                                return CategoryTile(
                                   image: categories[index],
                                   name: CategoryName[index],
-                                  userEmail: widget.email);
-                            }),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('All Products',
-                          style: AppWidget.semiboldTextFeildStyle()),
-                      Text('see all',
-                          style: TextStyle(
-                              color: Colors.purple,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold))
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Container(
-                    height: 240,
-                    child: ListView(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(right: 20.0),
-                          padding: EdgeInsets.symmetric(horizontal: 20.0),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                'images/headphone2.png',
-                                height: 150.0,
-                                width: 150.0,
-                              ),
-                              Text(
-                                'Headphone',
-                                style: AppWidget.semiboldTextFeildStyle(),
-                              ),
-                              SizedBox(
-                                height: 10.0,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    '\$100',
-                                    style: TextStyle(
-                                        color: Colors.purple,
-                                        fontSize: 22.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    width: 30.0,
-                                  ),
-                                  Container(
-                                      padding: EdgeInsets.all(5),
-                                      decoration: BoxDecoration(
-                                          color: Colors.purple,
-                                          borderRadius:
-                                              BorderRadius.circular(7)),
-                                      child: Icon(
-                                        Icons.add,
-                                        color: Colors.white,
-                                      ))
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(right: 20.0),
-                          padding: EdgeInsets.symmetric(horizontal: 20.0),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                'images/watch2.png',
-                                height: 150.0,
-                                width: 150.0,
-                              ),
-                              Text(
-                                'Apple Watch',
-                                style: AppWidget.semiboldTextFeildStyle(),
-                              ),
-                              SizedBox(
-                                height: 10.0,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    '\$300',
-                                    style: TextStyle(
-                                        color: Colors.purple,
-                                        fontSize: 22.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    width: 30.0,
-                                  ),
-                                  Container(
-                                      padding: EdgeInsets.all(5),
-                                      decoration: BoxDecoration(
-                                          color: Colors.purple,
-                                          borderRadius:
-                                              BorderRadius.circular(7)),
-                                      child: Icon(
-                                        Icons.add,
-                                        color: Colors.white,
-                                      ))
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(right: 20.0),
-                          padding: EdgeInsets.symmetric(horizontal: 20.0),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                'images/laptop2.png',
-                                height: 150.0,
-                                width: 150.0,
-                              ),
-                              Text(
-                                'Laptop',
-                                style: AppWidget.semiboldTextFeildStyle(),
-                              ),
-                              SizedBox(
-                                height: 10.0,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    '\$1200',
-                                    style: TextStyle(
-                                        color: Colors.purple,
-                                        fontSize: 22.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    width: 30.0,
-                                  ),
-                                  Container(
-                                      padding: EdgeInsets.all(5),
-                                      decoration: BoxDecoration(
-                                          color: Colors.purple,
-                                          borderRadius:
-                                              BorderRadius.circular(7)),
-                                      child: Icon(
-                                        Icons.add,
-                                        color: Colors.white,
-                                      ))
-                                ],
-                              )
-                            ],
+                                  userEmail: widget.email,
+                                );
+                              }),
+                            ),
                           ),
                         ),
                       ],
                     ),
-                  )
-                ],
+                    SizedBox(height: 20.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'All Products',
+                          style: AppWidget.semiboldTextFeildStyle(),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20.0),
+                    GridView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10.0,
+                        mainAxisSpacing: 10.0,
+                        childAspectRatio: 0.75,
+                      ),
+                      itemCount: CategoryName.length,
+                      itemBuilder: (context, index) {
+                        return ProductTile(
+                          image: categories[index],
+                          name: CategoryName[index],
+                          price: '\$100', // Replace with actual prices
+                          detail:
+                              'Product detail', // Replace with actual details
+                          userEmail: widget.email,
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
     );
   }
 }
 
-// ignore: must_be_immutable
-class CategoryTile extends StatelessWidget {
-  String image, name, userEmail;
-  CategoryTile(
-      {super.key,
-      required this.image,
-      required this.name,
-      required this.userEmail});
+class ProductTile extends StatelessWidget {
+  final String image, name, price, detail, userEmail;
+
+  const ProductTile({
+    Key? key,
+    required this.image,
+    required this.name,
+    required this.price,
+    required this.detail,
+    required this.userEmail,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    CategoryProducts(category: name, userEmail: userEmail)));
+          context,
+          MaterialPageRoute(
+            builder: (context) => CategoryProducts(
+              category: name,
+              userEmail: userEmail,
+            ),
+          ),
+        );
+      },
+      child: Container(
+        padding: EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Image.asset(
+                image,
+                fit: BoxFit.contain,
+              ),
+            ),
+            SizedBox(height: 8.0),
+            Text(
+              name,
+              style: AppWidget.semiboldTextFeildStyle(),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  price,
+                  style: TextStyle(
+                    color: Colors.purple,
+                    fontSize: 22.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    // Implement add to cart functionality
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      color: Colors.purple,
+                      borderRadius: BorderRadius.circular(7),
+                    ),
+                    child: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CategoryTile extends StatelessWidget {
+  final String image, name, userEmail;
+
+  CategoryTile({
+    Key? key,
+    required this.image,
+    required this.name,
+    required this.userEmail,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CategoryProducts(
+              category: name,
+              userEmail: userEmail,
+            ),
+          ),
+        );
       },
       child: Container(
         margin: EdgeInsets.only(right: 20.0),
         padding: EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(10)),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
         height: 90,
         width: 90,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
               image,
@@ -363,7 +312,15 @@ class CategoryTile extends StatelessWidget {
               width: 50.0,
               fit: BoxFit.cover,
             ),
-            Icon(Icons.arrow_forward)
+            SizedBox(height: 8.0),
+            Text(
+              name,
+              style: TextStyle(
+                fontSize: 12.0,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
           ],
         ),
       ),

@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:random_string/random_string.dart';
 import '../services/database.dart';
+import 'bottomnav.dart';
 
 class Profile extends StatefulWidget {
   final String email;
@@ -80,10 +81,19 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xfff2f2f2),
-      // appBar: AppBar(
-      //   title: Text('Profile'),
-      //   backgroundColor: Color(0xFFfd6f3e),
-      // ),
+      appBar: AppBar(
+        title: Text('Edit Profile'),
+        backgroundColor: Colors.purple,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => BottomNav(email: widget.email)));
+          },
+        ),
+      ),
       body: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 90.0),
