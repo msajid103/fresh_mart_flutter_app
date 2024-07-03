@@ -44,7 +44,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           "Name": namecontroller.text,
           "Email": mailcontroller.text,
           "Id": Id,
-          "Image": "images/profile.png",
+          "Image":
+              "https://firebasestorage.googleapis.com/v0/b/fresh-mart-app.appspot.com/o/profileImages%2F98872y3542?alt=media&token=5b5bde6a-a582-4307-bd88-78619b35fa8f",
         };
         await DatabaseMethods().addUserDetails(userInfoMap, Id);
         Navigator.push(

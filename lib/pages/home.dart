@@ -247,7 +247,15 @@ class ProductTile extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // Implement add to cart functionality
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CategoryProducts(
+                          category: name,
+                          userEmail: userEmail,
+                        ),
+                      ),
+                    );
                   },
                   child: Container(
                     padding: EdgeInsets.all(5),
